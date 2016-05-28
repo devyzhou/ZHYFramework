@@ -12,6 +12,8 @@
 #import "ZHYNetworking.h"
 #import "AFNetworkReachabilityManager.h"
 #import "ZHYAPIProxy.h"
+#import "MBProgressHUD.h"
+#import "AppMacro.h"
 
 #define ZHYCallAPI(REQUEST_METHOD,REQUEST_ID) \
 {                                              \
@@ -163,8 +165,45 @@
 @end
 
 
+
+
 @implementation ZHYAPIBaseManager (HUDProgress)
 
+-(void)showNetworkIndicator{
+    UIApplication *app=[UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible=YES;
+}
+
+-(void)hideNetworkIndicator{
+    UIApplication *app=[UIApplication sharedApplication];
+    app.networkActivityIndicatorVisible=NO;
+}
+
+-(void)showProgress {
+    [MBProgressHUD showHUDAddedTo:kKeyWindow animated:YES];
+}
+
+-(void)hideProgress {
+    [MBProgressHUD hideHUDForView:kKeyWindow animated:YES];
+}
+
+- (void)toast:(NSString *)text {
+    [self toast:text duration:2];
+}
+
+- (void)toast:(NSString *)text duration:(NSTimeInterval)duration {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:kKeyWindow animated:YES];
+    hud.detailsLabelFont = [UIFont systemFontOfSize:14];
+    hud.detailsLabelText = text;
+    hud.margin = 10.f;
+    hud.removeFromSuperViewOnHide = YES;
+    hud.mode = MBProgressHUDModeText;
+    [hud hide:YES afterDelay:duration];
+}
+
+-(void)showHUDText:(NSString*)text{
+    [self toast:text];
+}
 
 
 @end

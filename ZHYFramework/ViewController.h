@@ -6,9 +6,9 @@
 //  Copyright © 2016年 ZhouYuan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ZHYBaseViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : ZHYBaseViewController
 
 
 @end

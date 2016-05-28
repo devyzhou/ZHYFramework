@@ -123,7 +123,6 @@ typedef NS_ENUM (NSUInteger, ZHYAPIManagerRequestType){
 
 - (BOOL)shouldCache;
 
-
 @end
 
 @interface ZHYAPIBaseManager (HUDProgress)
@@ -135,12 +134,6 @@ typedef NS_ENUM (NSUInteger, ZHYAPIManagerRequestType){
 - (void)showProgress;
 
 - (void)hideProgress;
-
-- (void)alert:(NSString *)msg;
-
-- (BOOL)alertError:(NSError *)error;
-
-- (BOOL)filterError:(NSError *)error;
 
 - (void)showHUDText:(NSString *)text;
 
