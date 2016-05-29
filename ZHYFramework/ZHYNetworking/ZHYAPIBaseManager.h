@@ -86,9 +86,11 @@ typedef NS_ENUM (NSUInteger, ZHYAPIManagerRequestType){
 @optional
 - (void)cleanData;
 - (NSDictionary *)reformParams:(NSDictionary *)params;
-- (BOOL)shouldCache;
+- (NSTimeInterval)outdateTimeSeconds; //设置缓存时间，默认为0
 
 @end
+
+
 
 
 
@@ -121,7 +123,7 @@ typedef NS_ENUM (NSUInteger, ZHYAPIManagerRequestType){
 - (void)cancelRequestWithRequestId:(NSInteger)requestID;
 
 
-- (BOOL)shouldCache;
+- (NSTimeInterval)outdateTimeSeconds;
 
 @end
 

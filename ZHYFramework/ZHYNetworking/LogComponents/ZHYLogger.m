@@ -68,6 +68,25 @@
 
 }
 
++ (void)logDebugInfoWithCachedResponse:(ZHYURLResponse *)response methodName:(NSString *)methodName serviceIdentifier:(ZHYService *)service{
+#ifdef DEBUG
+    NSMutableString *logString = [NSMutableString stringWithString:@"\n\n==============================================================\n=                      Cached Response                       =\n==============================================================\n\n"];
+    
+    [logString appendFormat:@"API Name:\t\t%@\n", methodName ?:@"N/A"];
+    [logString appendFormat:@"Version:\t\t%@\n", service.apiVersion ?:@"N/A"];
+    [logString appendFormat:@"Service:\t\t%@\n", [service class]];
+    [logString appendFormat:@"Public Key:\t\t%@\n", service.publicKey ?:@"N/A"];
+    [logString appendFormat:@"Private Key:\t%@\n", service.privateKey ?:@"N/A"];
+    [logString appendFormat:@"Method Name:\t%@\n", methodName];
+    [logString appendFormat:@"Params:\n%@\n\n", response.requestParams];
+    
+    [logString appendFormat:@"\n\n==============================================================\n=                        Response End                        =\n==============================================================\n\n\n\n"];
+    NSLog(@"%@", logString);
+#endif
+
+}
+
+
 
 
 + (instancetype)sharedInstance{

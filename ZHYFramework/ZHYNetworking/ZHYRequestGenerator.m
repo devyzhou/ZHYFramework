@@ -11,6 +11,7 @@
 #import "ZHYService.h"
 #import "ZHYServiceFactory.h"
 #import "ZHYLogger.h"
+#import "NSURLRequest+Properties.h"
 
 @interface ZHYRequestGenerator ()
 
@@ -35,6 +36,7 @@
     
     NSString *urlString = [self generateURLStringWithServiceIdentifier:serviceIdentifier methodName:methodName];
     NSMutableURLRequest *request = [self.httpRequestSerializer requestWithMethod:@"GET" URLString:urlString parameters:requestParams error:NULL];
+    request.requestParams = requestParams;
     [ZHYLogger logDebugInfoWithRequest:request apiName:methodName service:[self generateService:serviceIdentifier] requestParams:requestParams httpMethod:@"GET"];
     return request;
 }
@@ -43,6 +45,7 @@
     
     NSString *urlString = [self generateURLStringWithServiceIdentifier:serviceIdentifier methodName:methodName];
     NSMutableURLRequest *request = [self.httpRequestSerializer requestWithMethod:@"POST" URLString:urlString parameters:requestParams error:NULL];
+    request.requestParams = requestParams;
     [ZHYLogger logDebugInfoWithRequest:request apiName:methodName service:[self generateService:serviceIdentifier] requestParams:requestParams httpMethod:@"POST"];
     return request;
 }

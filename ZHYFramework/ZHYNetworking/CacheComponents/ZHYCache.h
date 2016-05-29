@@ -19,7 +19,8 @@
 - (void)saveCacheWithData:(NSData *)cachedData
         serviceIdentifier:(NSString *)serviceIdentifier
                methodName:(NSString *)methodName
-            requestParams:(NSDictionary *)requestParams;
+            requestParams:(NSDictionary *)requestParams
+       outdateTimeSeconds:(NSTimeInterval)cacheOutdateTimeSeconds;
 
 - (void)deleteCacheWithServiceIdentifier:(NSString *)serviceIdentifier
                               methodName:(NSString *)methodName
@@ -28,8 +29,9 @@
 
 
 - (NSData *)fetchCachedDataWithKey:(NSString *)key;
-- (void)saveCacheWithData:(NSData *)cachedData key:(NSString *)key;
+- (void)saveCacheWithData:(NSData *)cachedData outdateTimeSeconds:(NSTimeInterval)cacheOutdateTimeSeconds key:(NSString *)key;
 - (void)deleteCacheWithKey:(NSString *)key;
+
 - (void)clean;
 
 @end

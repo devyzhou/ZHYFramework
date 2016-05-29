@@ -7,6 +7,7 @@
 //
 
 #import "ZHYURLResponse.h"
+#import "NSURLRequest+Properties.h"
 
 @interface ZHYURLResponse ()
 
@@ -14,12 +15,14 @@
 @property (nonatomic, copy, readwrite) id content;
 @property (nonatomic, copy, readwrite) NSData *responseData;
 @property (nonatomic, assign, readwrite) NSInteger requestId;
+@property (strong, nonatomic, readwrite) NSURLRequest *request;
+@property (nonatomic, assign, readwrite) BOOL isCache;
 
 @end
 
 @implementation ZHYURLResponse
 
-- (instancetype)initWithRequestId:(NSNumber *)requestId responseData:(NSData *)responseData error:(NSError *)error{
+- (instancetype)initWithRequestId:(NSNumber *)requestId request:(NSURLRequest *)request responseData:(NSData *)responseData error:(NSError *)error{
     self = [super init];
     if (self) {
         if (responseData) {
@@ -32,6 +35,22 @@
         self.status = [self responseStatusWithError:error];
         self.requestId = [requestId integerValue];
         self.responseData = responseData;
+        self.request = request;
+        self.requestParams = request.requestParams;
+        self.isCache = NO;
+    }
+    return self;
+}
+
+- (instancetype)initWithData:(NSData *)data{
+    self = [super init];
+    if (self) {
+        self.status = [self responseStatusWithError:nil];
+        self.requestId = 0;
+        self.request = nil;
+        self.responseData = [data copy];
+        self.content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:NULL];
+        self.isCache = YES;
     }
     return self;
 }

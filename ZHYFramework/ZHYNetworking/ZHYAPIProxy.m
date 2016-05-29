@@ -71,7 +71,9 @@
             [self.dispatchTable removeObjectForKey:requestId];
         }
         ZHYURLResponse *URLResponse = [[ZHYURLResponse alloc] initWithRequestId:requestId
+                                                                        request:request
                                                                    responseData:responseObject error:error];
+                                       
         completionHandler?completionHandler(URLResponse,error):nil;
         
         [ZHYLogger logDebugInfoWithResponse:(NSHTTPURLResponse *)response
@@ -93,7 +95,6 @@
     if (!_sessionManager) {
         _sessionManager = [[AFURLSessionManager alloc] init];
         _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        //_sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
     }
     return _sessionManager;
 }
