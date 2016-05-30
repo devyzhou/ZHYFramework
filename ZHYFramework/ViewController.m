@@ -6,6 +6,7 @@
 //  Copyright © 2016年 ZhouYuan. All rights reserved.
 //
 
+#import <Masonry/View+MASAdditions.h>
 #import "ViewController.h"
 #import "PostAPIManager.h"
 
@@ -15,6 +16,7 @@
 
 @property (strong, nonatomic) UIButton *refreshButton;
 
+@property (assign, nonatomic) NSInteger moveX;
 @end
 
 @implementation ViewController
@@ -23,10 +25,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.moveX = SCREEN_WIDTH/6;
     [self.view addSubview:self.refreshButton];
     [self loadData];
-
+    
+    [self layoutSubviews];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)layoutSubviews{
+    @zyweakify(self);
+    [self.refreshButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        @zystrongify(self);
+        make.centerX.equalTo(@(self.moveX));
+        make.centerY.equalTo(@(self.moveX));
+        make.width.equalTo(@100);
+        make.height.equalTo(@40);
+    }];
+}
+
+- (void)updateConstraints{
+    self.moveX += 10;
+    @zyweakify(self);
+    [self.refreshButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        @zystrongify(self);
+        make.centerX.equalTo(@(self.moveX));
+        make.centerY.equalTo(@(self.moveX));
+    }];
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +65,7 @@
 #pragma mark - even response
 
 - (void)refresh{
+    [self updateConstraints];
     if ([self.postApiManager isLoading]) {
         NSLog(@"ok");
         return;
