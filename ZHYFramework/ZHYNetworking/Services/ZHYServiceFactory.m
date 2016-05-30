@@ -8,6 +8,7 @@
 
 #import "ZHYServiceFactory.h"
 #import <objc/runtime.h>
+#import "ZHYDefaultService.h"
 
 @implementation ZHYServiceFactory
 
@@ -22,6 +23,9 @@
 }
 
 - (ZHYService <ZHYServiceProtocal> *)serviceWithIdentifier:(NSString *)identifier{
+    if (!identifier) {
+        return [[ZHYDefaultService alloc] init];
+    }
     return [[NSClassFromString(identifier) alloc] init];
 }
 

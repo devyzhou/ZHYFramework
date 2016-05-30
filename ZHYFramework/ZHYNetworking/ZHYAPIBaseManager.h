@@ -80,10 +80,10 @@ typedef NS_ENUM (NSUInteger, ZHYAPIManagerRequestType){
 
 @required
 - (NSString *)methodName; // 方法名
-- (NSString *)serviceType; // 服务器名
 - (ZHYAPIManagerRequestType)requestType; // 请求类型
 
 @optional
+- (NSString *)serviceType; // 服务器名
 - (void)cleanData;
 - (NSDictionary *)reformParams:(NSDictionary *)params;
 - (NSTimeInterval)outdateTimeSeconds; //设置缓存时间，默认为0
@@ -122,8 +122,9 @@ typedef NS_ENUM (NSUInteger, ZHYAPIManagerRequestType){
 - (void)cancelAllRequests;
 - (void)cancelRequestWithRequestId:(NSInteger)requestID;
 
-
+- (NSString *)serviceType; // 服务器名
 - (NSTimeInterval)outdateTimeSeconds;
+
 
 @end
 

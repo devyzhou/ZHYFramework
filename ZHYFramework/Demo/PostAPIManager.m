@@ -22,10 +22,6 @@
 
 #pragma mark - ZHYAPIManager
 
-- (NSString *)serviceType{
-    return NSStringFromClass([ZHYServiceTest class]);
-}
-
 - (NSString *)methodName{
     return @"stream/0/posts/stream/global";
 }

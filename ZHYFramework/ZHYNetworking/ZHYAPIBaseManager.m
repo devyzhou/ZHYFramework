@@ -167,6 +167,10 @@
 
 #pragma mark - child method
 
+- (NSString *)serviceType{
+    return nil;
+}
+
 - (NSTimeInterval)outdateTimeSeconds{
     return 0;
 }
