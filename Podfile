@@ -2,7 +2,7 @@ platform :ios, "8.0"
 inhibit_all_warnings!
 use_frameworks!
 
-target  ‘ZHYFramework’ do
+target 'ZHYFramework' do
     pod 'AFNetworking',             '~>3.1.0'
     pod 'YYModel',                  '~>1.0.2'
     pod 'MBProgressHUD',            '~>0.9.2'
@@ -14,4 +14,5 @@ target  ‘ZHYFramework’ do
     pod 'CRToast',                  '~>0.0.9'
     pod 'Masonry',                  '~>1.0.0'
     pod 'SVPullToRefresh',          '~>0.4.1'
+    pod 'Aspects',                  '~>1.4.1'
 end

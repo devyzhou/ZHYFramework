@@ -33,6 +33,10 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)layoutSubviews{
     @zyweakify(self);
     [self.refreshButton mas_makeConstraints:^(MASConstraintMaker *make) {
